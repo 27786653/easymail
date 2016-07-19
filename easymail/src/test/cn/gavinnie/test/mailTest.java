@@ -20,7 +20,7 @@ public class mailTest {
 		// 139邮箱 13077403326@139.com
 
 		String userName = "13927734916@163.com"; // 用户邮箱地址
-		String password = "wfl970530"; // 密码或者授权码
+		String password = "******"; // 密码或者授权码
 		String targetAddress = "791120662@qq.com"; // 接受者邮箱地址
 
 		// 设置邮件内容
