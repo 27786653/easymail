@@ -24,36 +24,60 @@
 
 ## 使用说明
 
-三句话即可发送，暂时支持10多种邮箱发送，如果有问题请告诉我改下，后面如果有需求会增加模板发送，图文信息，附件，定时延时，群发等等
+三句话即可发送，暂时支持10多种邮箱发送，附件，群发 ，如果有问题请告诉我改下，后面如果有需求会增加模板发送，图文信息，定时延时等等
 
 ## 测试
 
-### easymail下载链接:  [百度云下载](http://yun.baidu.com/share/link?shareid=2021585503&uk=3576946859)
+### easymail下载链接:  [百度云下载](http://pan.baidu.com/s/1hs8qFBI)
+### 源代码： [easymail](https://github.com/27786653/easymail/tree/master)
 ### 调试代码如下：
     
 ```
-	public static void main(String[] args) {
+		public static void main(String[] args) {
 		
 		String userName = "****@139.com";   //用户邮箱地址
 		String password = "*****";    //密码或者授权码
 		String targetAddress = "****@139.com";	 //接受者邮箱地址
-		
-		//设置邮件内容
+
+
+		// 设置邮件内容
 		MimeMessageDTO mimeDTO = new MimeMessageDTO();
 		mimeDTO.setSentDate(new Date());
 		mimeDTO.setSubject("邮件的标题");
 		mimeDTO.setText("邮件的内容"+targetAddress);
-		
-		//发送邮件
-		if(MailUtil.sendEmail(userName, password, targetAddress, mimeDTO)){
+
+//		// 发送单邮件
+		if (MailUtil.sendEmail(userName, password, targetAddress, mimeDTO)) {
 			System.out.println("邮件发送成功！");
-		}else{
+		} else {
 			System.out.println("邮件发送失败!!!");
 		}
+		// 发送单邮件(附件)
+		List<String> filepath=new ArrayList<String>();
+		filepath.add("D:/temple.xls");
+		filepath.add("D:/test.xls");
+		if (MailUtil.sendEmailByFile(userName, password, targetAddress, mimeDTO,filepath)) {
+			System.out.println("邮件发送成功！");
+		} else {
+			System.out.println("邮件发送失败!!!");
+		}
+		// 群发邮件
+		targetAddress = "*******@qq.com,************@qq.com";
+		if (MailUtil.sendGroupEmail(userName, password, targetAddress, mimeDTO)) {
+			System.out.println("邮件发送成功！");
+		} else {
+			System.out.println("邮件发送失败!!!");
+		}
+//		// 群发邮件(附件)
+		if (MailUtil.sendGroupEmailByFile(userName, password, targetAddress, mimeDTO,filepath)) {
+			System.out.println("邮件发送成功！");
+		} else {
+			System.out.println("邮件发送失败!!!");
+		}
+
 	}
 ```
 
-    
-
+   
 ## 最后
     大家如果是使用spring的话，可以与spring整合
